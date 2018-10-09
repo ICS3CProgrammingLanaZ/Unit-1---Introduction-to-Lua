@@ -16,8 +16,8 @@ local myCircle
 local areaTextCircle
 local circumference 
 local radiusOfCircle = 140
-local areaOfCircle
 local PI = 3.14
+local areaOfCircle = PI*radiusOfCircle*radiusOfCircle
 
 --set the backgorund colour of my screen. Remember that colors are between 0 and 1.
 display.setDefault("background", 229/255, 195/255, 217/255)
@@ -79,8 +79,8 @@ areaText:setTextColor (0, 0, 0)
 
 --write the area on the screen. Take into consideration the size of the font when positioning it on the screen
 areaText = display.newText("The area of this circle with a radius of \n" ..
-   radiusOfCircle .. "is " ..
-   areaOfRectangle .. " pixels². ", 0, 0, Arial, textSize)--anchor the text and set its (x,y) position 
+   radiusOfCircle .. " is " ..
+   areaOfCircle .. " pixels². ", 0, 0, Arial, textSize)--anchor the text and set its (x,y) position 
 
 --anchor the text and set its (x,y) position
 areaText.anchorX = 0
