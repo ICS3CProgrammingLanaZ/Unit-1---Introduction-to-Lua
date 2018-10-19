@@ -47,13 +47,14 @@ local function BlueButtonlistener(touch)
 		blueButton.isVisible = false
 		redButton.isVisible = true
 		textObject.isVisible = true
+		checkmark.isVisible = true
 	end 
 
 	if (touch.phase == "ended") then
 		blueButton.isVisible = true
 		redButton.isVisible = false
 		textObject.isVisible = false
-		checkmark.isVisible = true
+		
 	end
 end
 
@@ -66,18 +67,13 @@ blueButton:addEventListener("touch", BlueButtonlistener)
 --Description: when blue button is clicked, it will make the text appear with the red button,
 --and make the blue button disappear
 local function RedButtonlistener(touch)
-	if (touch.phase == "began") then
-		blueButton.isVisible = false
-		redButton.isVisible = true
-		textObject.isVisible = true
-		checkmark.isVisible = false
-	end 
+	
 
 	if (touch.phase == "ended") then
-		blueButton.isVisible = false
-		redButton.isVisible = true
-		textObject.isVisible = true
-		checkmark.isVisible = true
+		blueButton.isVisible = true
+		redButton.isVisible = false
+		textObject.isVisible = false
+		checkmark.isVisible = false
 	end
 	popSoundChannel = audio.play(popSound)
 end
