@@ -9,7 +9,9 @@ display.setDefault ("background", 140/255, 20/255, 200/255)
 
 --hide status bar
 display.setStatusBar(display.HiddenStatusBar)
-
+--Pop Sound
+local popSound = audio.loadSound("Sounds/popSound (1).wav")
+local popSoundChannel
 ----create red button, set its position and make visible
 local blueButton = display.newImageRect("Images/Fast Button Inactive@2x.png", 300, 150)
 blueButton.x = display.contentWidth/2
@@ -77,6 +79,7 @@ local function RedButtonlistener(touch)
 		textObject.isVisible = true
 		checkmark.isVisible = true
 	end
+	popSoundChannel = audio.play(popSound)
 end
 
 --add the respective listeners to each object

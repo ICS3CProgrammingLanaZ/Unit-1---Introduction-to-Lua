@@ -16,9 +16,12 @@ display.setStatusBar(display.HiddenStatusBar)
 --sets the background colour 
 display.setDefault("background" , 20/255, 255/255, 247/255)
 
--- creat a local variable 
+-- creat  local variables 
 local textObject
+local whackSound = audio.loadSound("Sounds/whack.mp3")
+local whackSoundChannel
 
+whackSoundChannel = audio.play(whackSound)
 --displays text on the screen at position X=300 and y=400 with
 --a default font style and font size of 80
 textObject = display.newText("Hello, Guysss!" , 300, 400, nil, 80 )

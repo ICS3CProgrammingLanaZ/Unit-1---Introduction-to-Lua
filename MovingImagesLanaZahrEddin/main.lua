@@ -5,7 +5,9 @@
 
 --hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
-
+--bkg sound
+local bkgSound = audio.loadSound("Sounds/bkgMusic.mp3")
+local bkgSoundChannel
 --global variables
 local scrollSpeed = 5
 
@@ -21,6 +23,7 @@ star.alpha = 0
 --set the initial x and y position of star 
 star.x = 0
 star.y = display.contentHeight / 3
+
 
 
 --Function: MoveStar
@@ -45,6 +48,8 @@ octopus.alpha = 1
 --set the initial x and y position of the octopus
 octopus.x = display.contentWidth
 octopus.y = display.contentHeight*2/3
+
+bkgSoundChannel = audio.play(bkgSound)
 
 --Function: MoveOctopus
 --Input: this function accepts an event listener
