@@ -35,7 +35,7 @@ local wrongSoundChannel
 -- local functions 
 local function AskQuestion()
 	--generate 2 random numbers between a max. and a min. number
-	randomOperator = math.random(0,3)
+	randomOperator = math.random(1,3)
 	randomNumber1 = math.random(10,20)
 	randomNumber2 = math.random(10,20)
 
@@ -131,7 +131,7 @@ incorrectObject.isVisible = false
 -- create numeric field 
 
 numericField = native.newTextField(display.contentWidth/2, display.contentHeight*2/3, 600, 95)
-numericField.inputType = "number"
+numericField.inputType = "default"
 
 --add the event listener fo the numeric field
 numericField:addEventListener( "userInput", NumericFieldListener)
