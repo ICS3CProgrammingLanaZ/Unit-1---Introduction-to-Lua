@@ -84,17 +84,18 @@ end
 -------------------------------------------------------------
 local function UpdateTime()
  -- decrement the number of sounds left
- secondsLeft = secondsLeft - 1
- --display the number of seconds left in the
- --clock object
- clockText.text = secondsLeft .. ""
- if (secondsLeft == 0 ) then
-  --reset the  number of seconds left 
-  secondsLeft = totalSeconds
-  lives = lives - 1
-  --***IF THERE ARE NO LIVES LEFT, PLAY A LOSE SOUND,
-  --SHOW A "YOU LOSE IMAGE AND CANCEL THE TIMER, REMOVE
-  --REMOVE THE THIRD HEART BY MAKIND IT INVISIBLE
+  secondsLeft = secondsLeft - 1
+  --display the number of seconds left in the
+  --clock object
+  clockText.text = secondsLeft .. ""
+
+    if (secondsLeft == 0 ) then
+    --reset the  number of seconds left 
+    secondsLeft = totalSeconds
+    lives = lives - 1
+    --***IF THERE ARE NO LIVES LEFT, PLAY A LOSE SOUND,
+    --SHOW A "YOU LOSE IMAGE AND CANCEL THE TIMER, REMOVE
+    --REMOVE THE THIRD HEART BY MAKIND IT INVISIBLE
      UpdateHearts()
   --*** CALL THE FUNCTION TO ASK A NEW QUESTION
  end
