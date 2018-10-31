@@ -1,3 +1,10 @@
+--Title:Lives and Timers
+--Name: Lana ZahrEddin
+--Course:ICS3C
+--This program asks math questions,everytime you get a question wrong u lose a heart and when 
+--lose all the hearts you have, a game over picture displays.
+
+
 --hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
 
@@ -7,8 +14,8 @@ display.setDefault( "background", 252/255, 5/255, 190/255 )
 -- LOCAL VARIABLES
 --------------------------------------------------------
 --create variables for the timer
-local totalSeconds = 5
-local secondsLeft = 5
+local totalSeconds = 8
+local secondsLeft = 8
 local clockText
 local countDownTimer
 local gameOver
@@ -24,7 +31,7 @@ local randomNumber2
 local randomOperator
 local userAnswer
 local incorrectAnswer
-local correctAnswer
+local correctAnswer 
 local pointsTextObject
 local numberOfPoints = 0
 
@@ -45,7 +52,7 @@ local trainSoundChannel
 -- LOCAL FUNCTIONS
 --------------------------------------------------------
 local function UpdateHearts()
- if (lives == 4) then
+    if (lives == 4) then
       heart1.isVisible = true
       heart2.isVisible = true
       heart3.isVisible = true
@@ -111,8 +118,8 @@ end
 local function AskQuestion()
  --generate 2 random numbers between a max. and a min. number
  randomOperator = math.random(1,3)
- randomNumber1 = math.random(10,20)
- randomNumber2 = math.random(10,20)
+ randomNumber1 = math.random(1,8)
+ randomNumber2 = math.random(1,8)
  
   if (randomOperator == 1) then
    correctAnswer = randomNumber1 + randomNumber2
@@ -121,17 +128,17 @@ local function AskQuestion()
  elseif (randomOperator == 2) then
    correctAnswer = randomNumber1 - randomNumber2
   --create question in text object
-  questionObject.text = randomNumber1 .. " * " .. randomNumber2 .. " = "
+  questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
  elseif (randomOperator == 3) then
    correctAnswer = randomNumber1 * randomNumber2
   --create question in text object
-  questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
+  questionObject.text = randomNumber1 .. " * " .. randomNumber2 .. " = "
  end 
 end
 
 
 local function HideCorrect()
- correctObject.isVisible = false
+ correctObject.isVisible = false 
  AskQuestion()
 end
 
@@ -146,9 +153,14 @@ local function NumericFieldListener( event )
  if ( event.phase == "began" ) then
   --clear text field 
   event.target.text = ""
- elseif event.phase == "submitted" then
+
+ elseif (event.phase == "submitted") then
   -- when the answer is submitted (enter key is pressed) set user input bto user's answer
   userAnswer = tonumber(event.target.text)
+
+  print("userAnswer = " .. userAnswer)
+  print("correctAnswer = " .. correctAnswer)
+
   --if the user's answer and the correct answer and the correct answer are the same:
   if (userAnswer == correctAnswer) then
    correctObject.isVisible = true 
@@ -157,17 +169,22 @@ local function NumericFieldListener( event )
    timer.performWithDelay(2000,HideCorrect)
    numberOfPoints = numberOfPoints + 1
    event.target.text = ""
+
         -- create increasing points in the text object
     pointsTextObject.text = "Points = ".. numberOfPoints
-  elseif (userAnswer ~= correctAnswer) then
+
+  else
    incorrectObject.isVisible = true
+   incorrectObject.text = "Oh,Incorrect. The correct answer is " .. correctAnswer 
    wrongSoundChannel = audio.play(wrongSound)
    lives = lives - 1
-   UpdateHearts()
-   incorrectObject.isVisible = true
-   timer.performWithDelay(2000,HideIncorrect)
-   event.target.text = ""   
+   timer.performWithDelay(2000, HideIncorrect)
+   event.target.text = "" 
+   UpdateHearts()  
+
+
   end
+  secondsLeft = totalSeconds
  end
 end
 ------------------------------------------------------------
@@ -205,7 +222,8 @@ correctObject = display.newText("Yeyy,Correct!", display.contentWidth/2, 250, ni
 correctObject:setTextColor(10/255, 50/255, 226/255)
 correctObject.isVisible = false
 -- create the incorrect  text object and make it invisible
-incorrectObject = display.newText("Oh Oh,Incorrect!", display.contentWidth/2, 250, nil, 50)
+incorrectObject = display.newText("", display.contentWidth/2, 250, nil, 50)
+incorrectObject.text = "Oh,Incorrect" 
 incorrectObject:setTextColor(4/255, 224/255, 19/255)
 incorrectObject.isVisible = false
 -----------------------------------------------------------

@@ -93,7 +93,7 @@ local function firstBall()
 		local ball3 = display.newImage("Images/super_ball.png", 0, 0)
 		
 		--add to physics
-		physics.addBody(ball3, {density=1,7, friction=9.5, bounce=0.7, radius=100})
+		physics.addBody(ball3, {density=1,7, friction=9.5, bounce=0.7, radius=50})
 		ball3:scale(2, 2)
 	
 	end
@@ -102,7 +102,7 @@ local function firstBall()
 	local function fourthBall()
 		-- creating fourth ball
 		local ball4 = display.newImage("Images/super_ball.png", 0, 0)
-		ball4:scale(1.5, 1.55)
+		ball4:scale(1.5, 1.5)
 	
 		--add to physics
 		physics.addBody(ball4, {density=1,0, friction=0.8, bounce=0.7, radius=37.5})
