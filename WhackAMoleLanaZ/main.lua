@@ -1,46 +1,86 @@
+------------------------------------------------------------
 --Title: Whack A Mole
---Name:Lana ZahrEddin
--- Course: ICS3C
---This program places a random object on the screen. If the user clicks on it in time the scrore increases by 1
----------------------------------------------------------------------------------------------------------------
---VARIABLES
------------------------------
-local numberPoints = 0
-local pointTextObject
-
-
-
---hide status bar 
+--Name: Lana ZahrEddin
+--Course: ICS3C
+--This program displays a mole randomly on the screen and if the user clicks on it before it disapears, the score increases by 1.
+------------------------------------------------------------
+-- hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
 
---create the background and set the color
-display.setDefault( "background",0/255, 45/255, 200/255)
+--LOCAL VARIABLES--
+local scoreNumber = 0
 
---crating the mole
-local mole = display.newImage("Images/mole.png" ,0, 0)
+--Sounds
+local whackSound = audio.loadSound( "Sounds/whack.mp3")
+local whackSoundChannel
 
---setting the position of the mole
+local backgroundSound = audio.loadSound("Sounds/bensound-buddy.mp3")
+local backgroundSoundChannel
+------------------------------------------------------
+--set the background colour and add background music
+display.setDefault( "background", 128/255, 91/255, 155/255 )
+backgroundSoundChannel = audio.play(backgroundSound)
+
+--create the mole and siplay it on the screen
+local mole = display.newImage("Images/mole2.png", 0, 0 )
+
+--set the position of the mole and rescale the size of the mole to  one third of its original size
 mole.x = display.contentCenterX
 mole.y = display.contentCenterY
---set the mole to ba third of its original size
-mole:scale(1/3,1/3)
---make the mole invisible
+mole:scale(1*1/2, 1*1/2)
+
+--set the mole to invisible
 mole.isVisible = false
 
---text object to display the score
-pointsTextObject = display.newText( "Points = ".. numberPoints, 150, 100, nil, 50 )
-pointsTextObject:setTextColor(37/255, 223/255, 43/255)
---------------------------------------------------------------------------------
---FUNCTIONS
----------------------------------
---This function that make sthe mole appear in a random (x,y) position on the screen before calling the function
+--create the score text and display it on the screen
+local scoreObject = display.newText( "Score :) = ".. scoreNumber, 160, 700, nil, 50)
+scoreObject:setTextColor(11/255, 18/255, 232/255)
+
+
+--FUNCTIONS--
+--Creating a function that makes the mole appears in random (x,y) positions on the screen  
 function PopUp()
-	--choosing random position on the screen between 0 and the size of the screen
-	mole.x = math.random(0, display.contentWidth)
-	mole.y = math.random(0, display.contentHeight)
+ --Choosing random Position on the screen between 0 and the size of the screen
+ mole.x = math.random( 0, display.contentWidth)
+ mole.y = math.random( 0, display.contentHeight)
+ --make the mole visible
+ mole.isVisible = true
 
-	--making the mole visible 
-	mole.isVisible = true 
-
+ --make the mole disapear after 1000 miliseconds
+ timer.performWithDelay( 1000, Hide)
 end
-PopUp()
+
+--This function calls the PopUp function after 1 seconds
+function PopUpDelay( )
+ timer.performWithDelay( 1000, PopUp)
+end
+
+--This function makes the mole invisible and then calls the PopUpDelay function
+function Hide( )
+ --Changing visibility
+  mole.isVisible = false
+  PopUpDelay()
+end
+
+--this function starts the game
+function GameStart( )
+ PopUpDelay()
+end
+
+--this function increments the score only if the mole is clicked.It then displays the new score.
+function Whacked( event )
+     -- If touch phase just started
+	if (event.phase == "began") then
+  		whackSoundChannel = audio.play(whackSound)
+  		scoreNumber = scoreNumber + 1
+  		scoreObject.isVisible = true
+  		Hide()
+  		scoreObject.text = ( "Score :) = "..scoreNumber)
+ 	end
+end
+--EVENT LISTENERS
+--Add the event listener to the moles so that if the mole is touched, the whacked function is called
+mole:addEventListener( "touch", Whacked)
+
+--START GAME
+GameStart()

@@ -118,8 +118,8 @@ end
 local function AskQuestion()
  --generate 2 random numbers between a max. and a min. number
  randomOperator = math.random(1,3)
- randomNumber1 = math.random(1,8)
- randomNumber2 = math.random(1,8)
+ randomNumber1 = math.random(10,20)
+ randomNumber2 = math.random(10,20)
  
   if (randomOperator == 1) then
    correctAnswer = randomNumber1 + randomNumber2
@@ -223,7 +223,6 @@ correctObject:setTextColor(10/255, 50/255, 226/255)
 correctObject.isVisible = false
 -- create the incorrect  text object and make it invisible
 incorrectObject = display.newText("", display.contentWidth/2, 250, nil, 50)
-incorrectObject.text = "Oh,Incorrect" 
 incorrectObject:setTextColor(4/255, 224/255, 19/255)
 incorrectObject.isVisible = false
 -----------------------------------------------------------
